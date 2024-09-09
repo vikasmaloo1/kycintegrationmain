@@ -9,7 +9,6 @@ const apiService = {
             'app-id': config.zoopAPI.appId
         };
 
-        console.log('Request data:', requestData);
 
         try {
             const response = await axios.post(config.zoopAPI.url, requestData, { headers });
