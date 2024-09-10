@@ -1,9 +1,11 @@
-const kycService = require("../models/kycservice");
+// const kycService = require("../models/kycservice");
+
+const { connection } = require("../models/allmodels");
 
 class KycService {
   static async create(data) {
     try {
-      return await kycService.create(data);
+      return await connection.kycService.create(data);
     } catch (error) {
       console.error(error);
       throw error;
