@@ -1,24 +1,48 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class kycAPI extends Model {
-    static associate(models) {
-      // define association here
+const Sequelize = require('sequelize');
+
+module.exports = (sequelize) => {
+  const KycAPI = sequelize.define('kycAPIs', {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    thirdPartyApi: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    apiURL: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    docRequireInRequest: {
+      type: Sequelize.BOOLEAN,
+      allowNull: true,
+    },
+    responseExample: {
+      type: Sequelize.JSON,
+      allowNull: true,
+    },
+    defaultSequence: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    },
+    status: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      defaultValue: 'active',
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
     }
-  }
-  kycAPI.init({
-    name: DataTypes.STRING,
-    thirdPartyApi: DataTypes.STRING,
-    apiURL: DataTypes.STRING,
-    docRequireInRequest: DataTypes.BOOLEAN,
-    responseExample: DataTypes.JSON,
-    defaultSequence: DataTypes.INTEGER,
-    status: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'kycAPI',
   });
-  return kycAPI;
+
+  return KycAPI;
 };

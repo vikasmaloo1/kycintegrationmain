@@ -1,19 +1,28 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class kycService extends Model {
-    static associate(models) {
-      // define association here
+const Sequelize = require('sequelize');
+
+module.exports = (sequelize) => {
+  const KycService = sequelize.define('kycServices', {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    status: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      defaultValue: 'active',
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
     }
-  }
-  kycService.init({
-    name: DataTypes.STRING,
-    status: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'kycService',
   });
-  return kycService;
+
+  return KycService;
 };
