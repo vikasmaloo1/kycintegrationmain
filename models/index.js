@@ -3,6 +3,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const config = require('../config/default'); // Load the configuration file
 
+// Initialize Sequelize with configuration
 const sequelize = new Sequelize(
   config.database.database,
   config.database.username,
@@ -12,7 +13,13 @@ const sequelize = new Sequelize(
     dialect: config.database.dialect,
     port: config.database.port,
     timezone: config.database.timezone,
-    logging: config.database.logging === 'true' ? console.log : false,
+    logging: config.database.logging ? console.log : false,
+    dialectOptions: {
+      connectTimeout: 60000, // Optional
+    },
+    retry: {
+      max: 3, // Retry failed connections
+    },
   }
 );
 

@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
+    "username": "dbomnichannel",
+    "password": "4gW&+VDc32h",
+    "database": "omni_channel_main",
+    "host": "infowareuat.cidxoi55oorv.ap-south-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
