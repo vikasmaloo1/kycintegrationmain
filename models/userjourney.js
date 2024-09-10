@@ -1,21 +1,31 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class userJourney extends Model {
-    static associate(models) {
-      // define association here
+const Sequelize = require('sequelize');
+
+module.exports = (sequelize) => {
+  const UserJourney = sequelize.define('userJourneys', {
+    userId: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+    },
+    isFinished: {
+      type: Sequelize.BOOLEAN,
+      allowNull: true,
+    },
+    lastJourneyId: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    },
+    status: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      defaultValue: 'active',
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
     }
-  }
-  userJourney.init({
-    userId: DataTypes.INTEGER,
-    isFinished: DataTypes.BOOLEAN,
-    lastJourneyId: DataTypes.INTEGER,
-    status: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'userJourney',
   });
-  return userJourney;
+
+  return UserJourney;
 };

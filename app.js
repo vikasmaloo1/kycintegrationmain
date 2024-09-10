@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config/default');
-const db = require('./models'); // Load the models and the Sequelize connection
+const db = require('./models');
 
 const app = express();
 
@@ -29,7 +29,8 @@ db.sequelize.sync({ force: false }) // Set to true to drop tables on every sync
   });
 
 // Routes
-const kycRoutes = require('./src/routes/kycRoutes');
+const routes = require('./src/routes/index');
+const kycRoutes = routes(app);
 app.use('/api', kycRoutes);
 
 

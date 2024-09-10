@@ -1,21 +1,36 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class journeyTable extends Model {
-    static associate(models) {
-      // define association here
+const Sequelize = require('sequelize');
+
+module.exports = (sequelize) => {
+  const JourneyTable = sequelize.define('journeyTables', {
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    kycServiceId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    sequence: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    kycAPI: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    status: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      defaultValue: 'active',
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
     }
-  }
-  journeyTable.init({
-    kycServiceId: DataTypes.INTEGER,
-    sequence: DataTypes.INTEGER,
-    kycAPI: DataTypes.INTEGER,
-    status: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'journeyTable',
   });
-  return journeyTable;
+
+  return JourneyTable;
 };

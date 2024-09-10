@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "dbomnichannel",
-    "password": "4gW&+VDc32h",
-    "database": "omni_channel_main",
+    "username": "dbconversationaluser",
+    "password": "TMr054v4$0",
+    "database": "conversational",
     "host": "infowareuat.cidxoi55oorv.ap-south-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
