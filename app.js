@@ -20,13 +20,13 @@ db.sequelize
   });
 
 // Sync models with the database
-// db.sequelize.sync({ force: false }) // Set to true to drop tables on every sync
-//   .then(() => {
-//     console.log('Database synchronized.');
-//   })
-//   .catch((err) => {
-//     console.error('Error during DB sync:', err);
-//   });
+db.sequelize.sync({ force: false }) // Set to true to drop tables on every sync
+  .then(() => {
+    console.log('Database synchronized.');
+  })
+  .catch((err) => {
+    console.error('Error during DB sync:', err);
+  });
 
 // Routes
 const kycRoutes = require('./src/routes/kycRoutes');
