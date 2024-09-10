@@ -1,32 +1,20 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const config = require('./config/default');
-const db = require('./models');
+const express = require("express");
+const config = require("config");
+const cors = require("cors");
+const morgan = require("morgan");
+const connection = require("./models/index");
+const { connect } = require("./models/allmodels");
+// const imports = require("./src/routes/index");
 
-const app = express();
+connect(connection);
+let app = express();
 
-// Middleware
-app.use(bodyParser.json({ limit: '50mb' })); // In case you need a large payload
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Test DB connection
-db.sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Database connected successfully.');
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
-
-// Sync models with the database
-db.sequelize.sync({ force: false }) // Set to true to drop tables on every sync
-  .then(() => {
-    console.log('Database synchronized.');
-  })
-  .catch((err) => {
-    console.error('Error during DB sync:', err);
-  });
+app.use(cors({ origin: "*" }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+//app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json());
+app.use(morgan("dev"));
 
 // Routes
 const routes = require('./src/routes/index');

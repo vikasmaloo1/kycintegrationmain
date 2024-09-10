@@ -13,6 +13,7 @@ module.exports = {
         port: process.env.DB_PORT || 3306,
         dialect: process.env.DB_DIALECT || 'mysql',
         timezone: process.env.TIME_ZONE || '+00:00',
+        DEBUG: process.env.DEBUG || "true",
     },
     
     jwt: {
