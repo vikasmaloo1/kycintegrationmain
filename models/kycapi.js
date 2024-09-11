@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     docRequireInRequest: {
-      type: Sequelize.BOOLEAN,
+      type: Sequelize.JSON,
       allowNull: true,
     },
     responseExample: {
