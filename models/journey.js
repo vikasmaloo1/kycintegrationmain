@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
-  const JourneyTable = sequelize.define('journeyTables', {
+  const journey = sequelize.define('journeys', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    kycAPI: {
+    kycApiId: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
@@ -32,5 +32,5 @@ module.exports = (sequelize) => {
     }
   });
 
-  return JourneyTable;
+  return journey;
 };

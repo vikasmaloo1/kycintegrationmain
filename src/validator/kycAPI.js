@@ -1,12 +1,12 @@
 const Joi = require("joi");
 
-const kycAPIServiceValidator = {
+const kycAPIValidator = {
   add: {
     name: Joi.string().required(),
     thirdPartyApi: Joi.string().required(),
-    apiURL: Joi.string().uri().required(),
-    docRequireInRequest: Joi.boolean().required(),
-    responseExample: Joi.object().required(),
+    apiURL: Joi.string().required(),
+    docRequireInRequest: Joi.object().optional(),
+    responseExample: Joi.object().optional(),
     defaultSequence: Joi.number().integer().required(),
     status: Joi.string().valid('active', 'inactive').required(),
   },
@@ -29,4 +29,4 @@ const kycAPIServiceValidator = {
   },
 };
 
-module.exports = { kycAPIServiceValidator };
+module.exports = { kycAPIValidator };

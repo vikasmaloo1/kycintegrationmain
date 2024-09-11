@@ -1,6 +1,6 @@
 const kycAPI = require('./kycapi');
 const kycService = require('./kycservice');
-const journeyTable = require('./journeytable');
+const journey = require('./journey');
 const userJourney = require('./userjourney');
 const kycRequests = require('./kycrequests');
 
@@ -14,7 +14,7 @@ class connection {
     static connect = (con) => {
         this.kycAPI = kycAPI(con);
         this.kycService = kycService(con);
-        this.journeyTable = journeyTable(con);
+        this.journey = journey(con);
         this.userJourney = userJourney(con);
         this.kycRequest = kycRequests(con); 
     };
