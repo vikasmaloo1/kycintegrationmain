@@ -5,6 +5,7 @@ const kycAPIs = require('./kycAPI');
 const userJourney = require('./userJourney');
 const journey = require('./journey');
 const kycRequest = require('./kycRequest');
+const kycRoutes = require('./KycMain');
 
 module.exports = (app) => {
   const router = express.Router();
@@ -13,7 +14,10 @@ module.exports = (app) => {
   router.use('/kycAPI', kycAPIs);
   router.use('/userJourney', userJourney);
   router.use('/journey', journey);
+  router.use('/', kycRoutes);
   router.use('/kycRequest', kycRequest);
+  
+  
 
   return router;
 };

@@ -23,7 +23,7 @@ class BaseService {
     }
   }
 
-  async findAll(opts = {}) {
+  async findAll(opts) {
     try {
       return await this.model.findAll(opts);
     } catch (error) {

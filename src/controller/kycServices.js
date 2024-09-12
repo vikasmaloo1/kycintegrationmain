@@ -1,7 +1,11 @@
-const kycAPIService = require('../../services/kycServices');
+const { connection } = require('../../models/allmodels');
+const BaseService = require('../../services/baseService');
 const { validateRequestInput } = require("../validator/index");
 const { kycServiceValidator } = require("../validator/kycService");
 const constants = require("../utils/constants");
+const { Op } = require('sequelize');
+
+const kycService = new BaseService(connection.kycService);
 
 exports.add = async (req, res) => {
   try {
@@ -12,7 +16,7 @@ exports.add = async (req, res) => {
       return res.status(constants.CODES.BAD_REQUEST).json({ success: false, error: validation.error });
     }
 
-    const kyc = await kycAPIService.create(requestData);
+    const kyc = await kycService.create(requestData);
     return res.status(constants.CODES.SUCCESS).json({ success: true, data: kyc });
   } catch (error) {
     return res.status(constants.CODES.SERVER_ERROR).json({ success: false, error: error.message });
@@ -28,7 +32,7 @@ exports.edit = async (req, res) => {
       return res.status(constants.CODES.BAD_REQUEST).json({ success: false, error: validation.error });
     }
 
-    const kyc = await kycAPIService.findOneByCond({ id: requestData.id });
+    const kyc = await kycService.findOneByCond({ id: requestData.id });
     if (!kyc) {
       return res.status(constants.CODES.NOT_FOUND).json({ success: false, message: constants.MESSAGES.KYC.NOT_FOUND });
     }
@@ -43,6 +47,7 @@ exports.edit = async (req, res) => {
 exports.list = async (req, res) => {
   try {
     const requestData = req.body;
+    console.log('sdvsdvc',requestData);
     const validation = validateRequestInput(kycServiceValidator.list, requestData);
     
     if (!validation.isValid) {
@@ -59,8 +64,8 @@ exports.list = async (req, res) => {
       opts.where.name = { [Op.like]: `%${requestData.name}%` };
     }
 
-    const list = await kycAPIService.findAllByCond(opts);
-    const totalCount = await kycAPIService.count(opts);
+    const list = await kycService.findAll(opts);
+    const totalCount = await kycService.count(opts);
 
     return res.status(constants.CODES.SUCCESS).json({
       success: true,
